@@ -12,18 +12,18 @@ module.exports = class QuickDelete extends Plugin {
         console.log("started")
         Message = getModule(m => m?.default?.displayName === "Message", false);
         inject("QuickDelete", Message, (_, res) => {
-            let res = res;
+            
             React.createElement("div",
                 {
                     className: ".quick-delete",
-                    onClick: () => {
+                    onClick: (() => {
                         let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
                         console.log("CE=" + ce);
                         if (this.keybindDown && this.clicking && ce.props.canDelete) {
                             console.log("dasdwetgwe");
                             this.deleteMessage(findInReactTree(res, r => r?.message).message);
                         }
-                    }
+                    }).bind(this)
                 });
         })
 
