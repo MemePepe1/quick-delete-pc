@@ -26,6 +26,7 @@ module.exports = class QuickDelete extends Plugin {
             // console.log(res)
             res.props.children.props.oldOnCLick = res.props.children.props.onClick;
             res.props.children.props.onClick = ((e) => {((e, _this, res) => {
+                console.log("Message.props.children.props.onClick called");
                 (async () => (res.props.children.props.oldOnCLick(e)))()
                 let d = findInReactTree(res, r => r?.message).props.message;
                 // let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
