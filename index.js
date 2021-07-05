@@ -49,6 +49,10 @@ module.exports = class QuickDelete extends Plugin {
 
     }
     deleteMessage(mesg) {
+        console.log(`
+        channel_id = ${mesg.channel_id}
+        message_id = ${mesg.id}
+        <3`)
         deleteMessage(mesg.channel_id, mesg.id)
     }
 
