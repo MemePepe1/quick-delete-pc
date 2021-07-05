@@ -1,7 +1,7 @@
 {
-    "name": "Template",
+    "name": "Quick Delete",
     "version": "1.0.0",
-    "description": "PC Plugin Template",
-    "author": "y/n",
+    "description": "Hold a keybind and click a message you can delete to delete said message!",
+    "author": "jai#0001",
     "license": "DBAD"
 }
