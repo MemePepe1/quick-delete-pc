@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
 const { findInReactTree } = require("powercord/util");
-const { getModule, React, messages: { deleteMessage } } = require("powercord/webpack");
+const { getModule, React, messages: { deleteMessage }, constants } = require("powercord/webpack");
 const { inject, uninject } = require("powercord/injector");
 const { can } = getModule(["can", "canEveryone"], false);
 const { getUser, getCurrentUser } = getModule(["getCurrentUser"], false);
