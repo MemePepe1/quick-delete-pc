@@ -15,7 +15,7 @@ module.exports = class QuickDelete extends Plugin {
         {
             console.log("message is note real :(");
         }
-        inject("QuickDelete", Message, (_, res) => {
+        inject("quick-delete", Message, (_, res) => {
             console.log("injected !!!");
             let prp = {
                 className: ".quick-delete",
@@ -47,7 +47,7 @@ module.exports = class QuickDelete extends Plugin {
     }
 
     pluginWillUnload() {
-        uninject("QuickDelete")
+        uninject("quick-delete")
     }
 };
 // {
