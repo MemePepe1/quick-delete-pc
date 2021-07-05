@@ -31,7 +31,8 @@ module.exports = class QuickDelete extends Plugin {
                 res,
                 style: {
                     width: "100%",
-                    height: "100%"
+                    height: "100%",
+                    position: "fixed"
                 }
             }
             console.log(res)
