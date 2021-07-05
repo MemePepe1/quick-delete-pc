@@ -2,6 +2,12 @@ const { Plugin } = require('powercord/entities');
 const { findInReactTree } = require("powercord/util");
 const { getModule, React, messages: { deleteMessage } } = require("powercord/webpack");
 const { inject, uninject } = require("powercord/injector");
+const { can } = getModule(["can", "canEveryone"], false);
+const { getUser, getCurrentUser } = getModule(["getCurrentUser"], false);
+const { getChannel } = getModule(["getChannel"], false);
+const { getSelectedChannelId } = getModule(["getSelectedChannelId"], false);
+const { Permissions: {MANAGE_MESSAGES}} = constants;
+const canDeleteMessage = d => (d.author.id == getCurrentUser().id || can(MANAGE_MESSAGES, getCurrentUser(), getChannel(getSelectedChannelId())));
 // Discord React Bits
 let Message;
 // constant keycodes
@@ -17,13 +23,14 @@ module.exports = class QuickDelete extends Plugin {
         }
         inject("quick-delete", Message, 'default', (_, res) => {
             
-            console.log(res)
+            // console.log(res)
             res.props.children.props.oldOnCLick = res.props.children.props.onClick;
             res.props.children.props.onClick = ((e) => {((e, _this, res) => {
                 (async () => (res.props.children.props.oldOnCLick(e)))()
-                let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
-                console.log("CE=" + ce);
-                if (_this.keybindDown && _this.clicking && ce.props.canDelete) {
+                let d = findInReactTree(res, r => r?.message).props.message;
+                // let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
+                console.log(d);
+                if (_this.keybindDown && _this.clicking && canDeleteMessage(d)) {
                     console.log("dasdwetgwe");
                     _this.deleteMessage(findInReactTree(res, r => r?.message).props.message);
                 }
