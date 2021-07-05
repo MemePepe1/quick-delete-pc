@@ -20,7 +20,7 @@ module.exports = class QuickDelete extends Plugin {
             console.log(res)
             res.props.children.props.oldOnCLick = res.props.children.props.onClick;
             res.props.children.props.onClick = ((e) => {((e, _this, res) => {
-                res.props.children.props.oldOnCLick(e);
+                (async () => (res.props.children.props.oldOnCLick(e)))()
                 let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
                 console.log("CE=" + ce);
                 if (_this.keybindDown && _this.clicking && ce.props.canDelete) {
