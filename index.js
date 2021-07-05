@@ -12,6 +12,7 @@ module.exports = class QuickDelete extends Plugin {
         console.log("started")
         Message = getModule(m => m?.default?.displayName === "Message", false);
         inject("QuickDelete", Message, (_, res) => {
+            let res = res;
             React.createElement("div",
                 {
                     className: ".quick-delete",
