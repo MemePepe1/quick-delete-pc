@@ -25,7 +25,8 @@ module.exports = class QuickDelete extends Plugin {
                 _this: this,
                 res
             }
-            React.createElement("div", prp);
+            res.children.unshift(React.createElement("div", prp));
+
         })
 
 
