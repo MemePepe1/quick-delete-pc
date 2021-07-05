@@ -15,11 +15,15 @@ module.exports = class QuickDelete extends Plugin {
     async startPlugin() {
         Message = getModule(m => m?.default?.displayName === "Message", false);
         inject("quick-delete", Message, 'default', (_, res) => {
+            // Reassign onClick function (botch)
             res.props.children.props.oldOnCLick = res.props.children.props.onClick;
             res.props.children.props.onClick = ((e) => {
                 ((e, _this, res) => {
-                    (async () => { res.props.children.props.oldOnCLick(e); console.log("oldOnClick finished.") })()
+                    // Call old onClick function to where it doesn't disturb the rest of the code
+                    (async () => { res.props.children.props.oldOnCLick(e)})()
+                    // Get `Message` Object
                     let d = findInReactTree(res, r => r?.message).message;
+                    // Delete message on keybind down && left click && canDeleteMessage.
                     if (_this.keybindDown && e.button == 0 && canDeleteMessage(d)) {
                         _this.deleteMessage(findInReactTree(res, r => r?.message).message);
                     }
