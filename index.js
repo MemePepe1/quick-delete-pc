@@ -16,26 +16,16 @@ module.exports = class QuickDelete extends Plugin {
             console.log("message is note real :(");
         }
         inject("quick-delete", Message, 'default', (_, res) => {
-            console.log("injected !!!");
-            let prp = {
-                className: ".quick-delete",
-                onClick: (() => {
-                    let ce = findInReactTree(this.props.res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
-                    console.log("CE=" + ce);
-                    if (this.props._this.keybindDown && this.props._this.clicking && ce.props.canDelete) {
-                        console.log("dasdwetgwe");
-                        this.props._this.deleteMessage(findInReactTree(this.props.res, r => r?.message).message);
-                    }
-                }),
-                _this: this,
-                res,
-                style: {
-                    width: "100%",
-                    height: "100%",
-                    position: "fixed"
-                }
-            }
+            
             console.log(res)
+            res.props.children.props.onClick((e) => {((e, _this, res) => {
+                let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
+                console.log("CE=" + ce);
+                if (_this.keybindDown && _this.clicking && ce.props.canDelete) {
+                    console.log("dasdwetgwe");
+                    _this.deleteMessage(findInReactTree(res, r => r?.message).props.message);
+                }
+            })(e, this, res)})
             res.props.children.props.children.unshift(React.createElement("div", prp));
             return res;
 
