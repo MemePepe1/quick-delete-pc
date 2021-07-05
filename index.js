@@ -32,7 +32,7 @@ module.exports = class QuickDelete extends Plugin {
                 console.log("message object retrieved");
                 // let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
                 console.log(d);
-                if (_this.keybindDown && _this.clicking && canDeleteMessage(d)) {
+                if (_this.keybindDown && e.button == 0 && canDeleteMessage(d)) {
                     console.log("dasdwetgwe");
                     _this.deleteMessage(findInReactTree(res, r => r?.message).props.message);
                 }
