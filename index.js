@@ -11,6 +11,10 @@ module.exports = class QuickDelete extends Plugin {
     async startPlugin() {
         console.log("started")
         Message = getModule(m => m?.default?.displayName === "Message", false);
+        if (Message == null || Message == undefined)
+        {
+            console.log("message is note real :(");
+        }
         inject("QuickDelete", Message, (_, res) => {
             console.log("injected !!!");
             let prp = {
