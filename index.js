@@ -17,13 +17,15 @@ module.exports = class QuickDelete extends Plugin {
                 {
                     className: ".quick-delete",
                     onClick: (() => {
-                        let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
+                        let ce = findInReactTree(this.props.res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
                         console.log("CE=" + ce);
-                        if (this.keybindDown && this.clicking && ce.props.canDelete) {
+                        if (this.props._this.keybindDown && this.props._this.clicking && ce.props.canDelete) {
                             console.log("dasdwetgwe");
-                            this.deleteMessage(findInReactTree(res, r => r?.message).message);
+                            this.props._this.deleteMessage(findInReactTree(this.props.res, r => r?.message).message);
                         }
-                    }).bind(this)
+                    }),
+                    _this: this,
+                    res: res
                 });
         })
 
