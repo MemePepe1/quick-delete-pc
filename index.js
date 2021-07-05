@@ -43,16 +43,16 @@ module.exports = class QuickDelete extends Plugin {
         uninject("QuickDelete")
     }
 };
-{
-    let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
-    console.log("CE=" + ce);
-    res.addEventListener("mousedown", e => {
-        setTimeout(() => {
-            if (this.keybindDown && this.clicking && ce.props.canDelete) {
-                console.log("dasdwetgwe");
-                this.deleteMessage(findInReactTree(res, r => r?.message).message);
-            }
-        }, 100)
-    })
-}
+// {
+//     let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
+//     console.log("CE=" + ce);
+//     res.addEventListener("mousedown", e => {
+//         setTimeout(() => {
+//             if (this.keybindDown && this.clicking && ce.props.canDelete) {
+//                 console.log("dasdwetgwe");
+//                 this.deleteMessage(findInReactTree(res, r => r?.message).message);
+//             }
+//         }, 100)
+//     })
+// }
 // findInReactTree(Message.props.childrenButtons, r => r?.hasOwnProperty("canDelete"))
