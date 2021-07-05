@@ -26,7 +26,6 @@ module.exports = class QuickDelete extends Plugin {
                     _this.deleteMessage(findInReactTree(res, r => r?.message).props.message);
                 }
             })(e, this, res)})
-            res.props.children.props.children.unshift(React.createElement("div", prp));
             return res;
 
         })
