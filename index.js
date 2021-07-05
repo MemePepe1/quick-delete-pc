@@ -9,7 +9,7 @@ const KEYCODES = {Backspace:8};
 module.exports = class QuickDelete extends Plugin {
     
     async startPlugin() {
-        Message = await getModule(m => m?.default?.displayName === "Message");
+        
         this.inject();
         document.body.addEventListener("keydown", (e) => {if (e.keyCode == KEYCODES.Backspace) {this.keybindDown = true;}})
         document.body.addEventListener("keyup", (e) => {if (e.keyCode == KEYCODES.Backspace) {this.keybindDown = false;}})
@@ -19,12 +19,14 @@ module.exports = class QuickDelete extends Plugin {
     }
     inject()
     {
+        Message = getModule(m => m?.default?.displayName === "Message", false);
         inject("QuickDelete", Message, (_, res) => {
             let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
+            res.addEventListener("mousedown", e => {setTimeout(100, () => {
             if (this.keybindDown && this.clicking && ce.props.canDelete)
             {
                 this.deleteMessage(findInReactTree(res, r => r?.message).message);
-            }
+            }})})
         })
     }
     deleteMessage(mesg){
