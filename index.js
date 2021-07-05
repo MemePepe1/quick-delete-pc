@@ -9,6 +9,7 @@ const KEYCODES = {Backspace:8};
 module.exports = class QuickDelete extends Plugin {
     
     async startPlugin() {
+        console.log("started")
         Message = getModule(m => m?.default?.displayName === "Message", false);
         inject("QuickDelete", Message, (_, res) => {
             let ce = findInReactTree(res.props.childrenButtons, r => r?.props?.hasOwnProperty("canDelete"))
