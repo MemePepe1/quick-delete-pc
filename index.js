@@ -9,7 +9,7 @@ const { getSelectedChannelId } = getModule(["getSelectedChannelId"], false);
 const { Permissions: { MANAGE_MESSAGES } } = constants;
 const canDeleteMessage = d => (d.author.id == getCurrentUser().id || can(MANAGE_MESSAGES, getCurrentUser(), getChannel(getSelectedChannelId())));
 let Message;
-const KEYCODES = { Backspace: 8 };
+const Activate = 8;
 module.exports = class QuickDelete extends Plugin {
 
     async startPlugin() {
@@ -31,8 +31,8 @@ module.exports = class QuickDelete extends Plugin {
             })
             return res;
         })
-        document.body.addEventListener("keydown", (e) => { if (e.keyCode == KEYCODES.Backspace) { this.keybindDown = true; } })
-        document.body.addEventListener("keyup", (e) => { if (e.keyCode == KEYCODES.Backspace) { this.keybindDown = false; } })
+        document.body.addEventListener("keydown", (e) => { if (e.keyCode == Activate) { this.keybindDown = true; } })
+        document.body.addEventListener("keyup", (e) => { if (e.keyCode == Activate) { this.keybindDown = false; } })
         document.body.addEventListener("mousedown", (e) => { if (e.button == 0) { this.mouseDown = true; } })
         document.body.addEventListener("mouseup", (e) => { if (e.button == 0) { this.mouseDown = false; } })
 
