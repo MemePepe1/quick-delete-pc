@@ -21,7 +21,7 @@ module.exports = class QuickDelete extends Plugin {
                     if (typeof res.props.children.props.oldOnCLick === 'function')
                         (async () => { res.props.children.props.oldOnCLick(e) })()
                     // Delete message on keybind down && left click && canDeleteMessage.
-                    if (d && _this.keybindDown && e.button == 0 && canDeleteMessage(message, channel)) {
+                    if (_this.keybindDown && e.button == 0 && canDeleteMessage(message, channel)) {
                         _this.deleteMessage(message);
                     }
                 })(e, this, res)
