@@ -20,11 +20,12 @@ module.exports = class QuickDelete extends Plugin {
             res.props.children.props.onClick = ((e) => {
                 ((e, _this, res) => {
                     // Call old onClick function to where it doesn't disturb the rest of the code
-                    (async () => { res.props.children.props.oldOnCLick(e)})()
+                    if (typeof res.props.children.props.oldOnCLick === 'function')
+                        (async () => { res.props.children.props.oldOnCLick(e) })()
                     // Get `Message` Object
-                    let d = findInReactTree(res, r => r?.message).message;
+                    let d = findInReactTree(res, r => r?.message)?.message;
                     // Delete message on keybind down && left click && canDeleteMessage.
-                    if (_this.keybindDown && e.button == 0 && canDeleteMessage(d)) {
+                    if (d && _this.keybindDown && e.button == 0 && canDeleteMessage(d)) {
                         _this.deleteMessage(findInReactTree(res, r => r?.message).message);
                     }
                 })(e, this, res)
