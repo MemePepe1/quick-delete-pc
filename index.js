@@ -24,9 +24,10 @@ module.exports = class QuickDelete extends Plugin {
         })
 
         // Weird quirk
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        document.body.addEventListener("keydown", this.handleKeyPress);
-        document.body.addEventListener("keyup", this.handleKeyPress);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        document.body.addEventListener("keydown", this.handleKeyDown);
+        document.body.addEventListener("keyup", this.handleKeyUp);
     }
 
     pluginWillUnload() {
@@ -34,13 +35,12 @@ module.exports = class QuickDelete extends Plugin {
 
         uninject("quick-delete")
 
-        document.body.removeEventListener('keydown', this.handleKeyPress);
-        document.body.removeEventListener('keyup', this.handleKeyPress);
+        document.body.removeEventListener('keydown', this.handleKeyDown);
+        document.body.removeEventListener('keyup', this.handleKeyUp);
     }
 
-    handleKeyPress(e) {
-        this.keyBindDown = e.code === this.settings.get('qdKey', "Backspace");
-    }
+    handleKeyUp(e) { this.keyBindDown = false; }
+    handleKeyDown(e) { this.keyBindDown = e.code === this.settings.get('qdKey', "Backspace"); }
 
     handleMessageClick(e, args, res) {
         try {
