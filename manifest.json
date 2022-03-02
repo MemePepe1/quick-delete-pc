@@ -1,6 +1,6 @@
 {
     "name": "Quick Delete",
-    "version": "1.0.0",
+    "file": "index.js"
     "description": "Hold a keybind and click a message you can delete to delete said message!",
     "author": "github:llamasking (original author: jai#0001)",
     "license": "DBAD"
